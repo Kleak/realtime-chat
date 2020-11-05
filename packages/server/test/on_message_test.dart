@@ -33,13 +33,15 @@ void main() {
   test('on message', () async {
     final peer1 = PeerMock();
     final peer2 = PeerMock();
+    when(peer1.listen()).thenAnswer((realInvocation) => Future.value());
+    when(peer2.listen()).thenAnswer((realInvocation) => Future.value());
     expect(store.state.peers.length, equals(0));
     store.dispatch(setupAndAddPeer('kleak', peer1));
     expect(store.state.peers.length, equals(1));
     store.dispatch(setupAndAddPeer('Paul', peer2));
     expect(store.state.peers.length, equals(2));
 
-    onMessage(store, peer1, 'kleak', Parameters('onMethod', {'msg': 'Hello world!'}));
+    await onMessage(store, peer1, 'kleak', Parameters('onMethod', {'msg': 'Hello world!'}));
 
     expect(verify(peer2.sendRequest('onMessage', {'msg': 'Hello world!', 'sender': 'kleak'})).callCount, equals(1));
     expect(verifyNever(peer1.sendRequest('onMessage', any)).callCount, equals(0));

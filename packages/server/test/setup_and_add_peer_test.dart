@@ -26,8 +26,10 @@ void main() {
   });
 
   test('setup and add peer', () async {
+    final peer = PeerMock();
+    when(peer.listen()).thenAnswer((realInvocation) => Future.value());
     expect(store.state.peers.length, equals(0));
-    store.dispatch(setupAndAddPeer('kleak', PeerMock()));
+    store.dispatch(setupAndAddPeer('kleak', peer));
     expect(store.state.peers.length, equals(1));
   });
 }
