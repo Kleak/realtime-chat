@@ -1,5 +1,5 @@
 import 'package:redux/redux.dart';
-import 'package:server/src/redux/actions/add_account.dart';
+import 'package:server/src/api_v1/redux/actions/add_account.dart';
 
 Reducer<Map<String, String>> accountsReducer = combineReducers<Map<String, String>>([
   TypedReducer(addAccount),

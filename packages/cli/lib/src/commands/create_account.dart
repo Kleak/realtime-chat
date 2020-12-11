@@ -22,7 +22,7 @@ class CreateAccountCommand extends Command {
     final basic = base64.encode(utf8.encode('$username:$password'));
 
     final response = await http.post(
-      'http://localhost:8080/account',
+      'http://localhost:8080/api_v1/account',
       body: json.encode(
         {
           'username': username,

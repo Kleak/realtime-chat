@@ -24,7 +24,7 @@ class SendMessageCommand extends Command {
     final basic = base64.encode(utf8.encode('$username:$password'));
 
     final socket = IOWebSocketChannel.connect(
-      Uri.parse('ws://localhost:8080/realtime/ws'),
+      Uri.parse('ws://localhost:8080/api_v1/realtime/ws'),
       headers: {
         HttpHeaders.authorizationHeader: 'Basic $basic',
       },
